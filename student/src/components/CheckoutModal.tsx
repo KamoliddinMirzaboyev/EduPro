@@ -20,8 +20,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   if (!course) return null;
 
+  const tariffs = course.tariffs ?? [];
+
   const currentPrice = selectedTariffId 
-    ? (course.tariffs.find(t => t.id === selectedTariffId)?.price_uzs || course.price)
+    ? (tariffs.find(t => t.id === selectedTariffId)?.price_uzs || course.price)
     : course.price;
 
   const handlePay = () => {
@@ -49,11 +51,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         </div>
 
         {/* Tariffs Selection */}
-        {course.tariffs.length > 0 && (
+        {tariffs.length > 0 && (
           <div className="space-y-2">
             <label className="text-xs font-semibold text-slate-900 dark:text-white">O'quv Tarifini Tanlang:</label>
             <div className="grid grid-cols-2 gap-3">
-              {course.tariffs.map(t => (
+              {tariffs.map(t => (
                 <div 
                   key={t.id} 
                   onClick={() => setSelectedTariffId(t.id)}

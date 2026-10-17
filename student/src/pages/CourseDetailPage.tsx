@@ -138,7 +138,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ onOpenChecko
 
                 {isOpen && (
                   <div className="divide-y divide-slate-100 dark:divide-white/5">
-                    {mod.lessons.map((lesson, lIdx) => (
+                    {(mod.lessons ?? []).map((lesson, lIdx) => (
                       <div key={lesson.id} className="px-5 py-3 flex items-center justify-between text-xs">
                         <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
                           <span className="font-mono text-slate-400">({lIdx + 1})</span>
