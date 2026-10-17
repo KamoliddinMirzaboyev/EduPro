@@ -29,16 +29,16 @@ export const Layout: React.FC<LayoutProps> = ({
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-slate-100/70 dark:bg-[#08090E] text-slate-900 dark:text-slate-100 flex font-sans antialiased selection:bg-blue-600 selection:text-white transition-colors duration-200">
+    <div className="h-screen w-screen overflow-hidden bg-[#FAFAFA] text-slate-900 flex font-sans antialiased selection:bg-slate-900 selection:text-white">
       {/* Mobile Backdrop Overlay */}
       {sidebarOpen && (
         <div 
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 lg:hidden animate-in fade-in duration-150"
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden animate-in fade-in duration-150"
         />
       )}
 
-      {/* Permanently Fixed Floating Curved Sidebar */}
+      {/* Docked Left Sidebar */}
       <Sidebar 
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
@@ -51,7 +51,7 @@ export const Layout: React.FC<LayoutProps> = ({
 
       {/* Main Content Workspace (Independently Scrollable) */}
       <div className="flex-1 flex flex-col h-screen min-w-0 overflow-hidden">
-        {/* Floating Rounded Navbar */}
+        {/* Docked Top Navbar */}
         <Header 
           setSidebarOpen={setSidebarOpen}
           searchQuery={searchQuery}
@@ -62,11 +62,11 @@ export const Layout: React.FC<LayoutProps> = ({
         />
 
         {/* Scrollable Content Viewport */}
-        <main className="flex-1 overflow-y-auto px-3 sm:px-4 md:px-6 py-3 space-y-5 custom-scrollbar">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 custom-scrollbar bg-[#FAFAFA]">
           {/* Toast Notification */}
           {toastMessage && (
-            <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 text-emerald-700 dark:text-emerald-300 flex items-center gap-2.5 text-xs animate-in slide-in-from-top-2 duration-200 shadow-sm">
-              <CheckCircle2 className="w-4 h-4 shrink-0" />
+            <div className="p-3.5 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-2.5 text-xs animate-in slide-in-from-top-2 duration-200 shadow-xs">
+              <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
               <span className="font-semibold">{toastMessage}</span>
             </div>
           )}

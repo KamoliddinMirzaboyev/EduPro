@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="uz" class="dark">
+<html lang="uz" class="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230F172A'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
@@ -12,20 +12,14 @@
     <script>
       (function() {
         try {
-          var saved = localStorage.getItem('edupro-theme');
-          var theme = saved || 'dark';
-          if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-            document.documentElement.classList.remove('light');
-          } else {
-            document.documentElement.classList.remove('dark');
-            document.documentElement.classList.add('light');
-          }
+          localStorage.setItem('edupro-theme', 'light');
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
         } catch (e) {}
       })();
     </script>
   </head>
-  <body class="bg-slate-50 dark:bg-[#08090E] text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white transition-colors duration-200">
+  <body class="bg-[#FAFAFA] text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

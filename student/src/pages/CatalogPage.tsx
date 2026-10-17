@@ -19,24 +19,26 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('Barchasi');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
+  const safeCourses: CourseDetail[] = Array.isArray(courses) ? courses : [];
+
   const categories = [
-    { label: 'Barchasi', count: courses.length },
-    { label: 'Backend', count: courses.filter(c => c.category.toLowerCase().includes('backend') || c.category.toLowerCase().includes('it')).length },
-    { label: 'Frontend', count: courses.filter(c => c.category.toLowerCase().includes('frontend')).length },
-    { label: 'AI', count: courses.filter(c => c.title.toLowerCase().includes('ai') || c.description.toLowerCase().includes('ai')).length },
-    { label: 'IELTS', count: courses.filter(c => c.category.toLowerCase().includes('ielts')).length },
+    { label: 'Barchasi', count: safeCourses.length },
+    { label: 'Backend', count: safeCourses.filter(c => (c.category || '').toLowerCase().includes('backend') || (c.category || '').toLowerCase().includes('it')).length },
+    { label: 'Frontend', count: safeCourses.filter(c => (c.category || '').toLowerCase().includes('frontend')).length },
+    { label: 'AI', count: safeCourses.filter(c => (c.title || '').toLowerCase().includes('ai') || (c.description || '').toLowerCase().includes('ai')).length },
+    { label: 'IELTS', count: safeCourses.filter(c => (c.category || '').toLowerCase().includes('ielts')).length },
   ];
 
-  const filteredCourses = courses.filter(c => {
+  const filteredCourses = safeCourses.filter(c => {
     const matchCategory = selectedCategory === 'Barchasi' || 
-      (selectedCategory === 'Backend' && (c.category.toLowerCase().includes('it') || c.category.toLowerCase().includes('backend'))) ||
-      (selectedCategory === 'Frontend' && (c.category.toLowerCase().includes('frontend'))) ||
-      (selectedCategory === 'AI' && (c.title.toLowerCase().includes('ai') || c.description.toLowerCase().includes('ai'))) ||
-      (selectedCategory === 'IELTS' && c.category.toLowerCase().includes('ielts'));
+      (selectedCategory === 'Backend' && ((c.category || '').toLowerCase().includes('it') || (c.category || '').toLowerCase().includes('backend'))) ||
+      (selectedCategory === 'Frontend' && ((c.category || '').toLowerCase().includes('frontend'))) ||
+      (selectedCategory === 'AI' && ((c.title || '').toLowerCase().includes('ai') || (c.description || '').toLowerCase().includes('ai'))) ||
+      (selectedCategory === 'IELTS' && (c.category || '').toLowerCase().includes('ielts'));
     
     const matchSearch = !searchQuery || 
-      c.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      c.description.toLowerCase().includes(searchQuery.toLowerCase());
+      (c.title || '').toLowerCase().includes(searchQuery.toLowerCase()) || 
+      (c.description || '').toLowerCase().includes(searchQuery.toLowerCase());
 
     return matchCategory && matchSearch;
   });
@@ -144,7 +146,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({
                     <span className="flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-slate-400" /> 12 562 o'quvchi
                     </span>
-                    <span>{c.modules.length} ta modul</span>
+                    <span>{c.total_modules ?? c.modules?.length ?? 0} ta modul</span>
                   </div>
 
                   <div className="flex items-center gap-2">

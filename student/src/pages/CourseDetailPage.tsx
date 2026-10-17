@@ -117,7 +117,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ onOpenChecko
       <div className="space-y-4">
         <h2 className="text-lg font-bold text-slate-900 dark:text-white">Kurs Dasturi (Syllabus)</h2>
         <div className="space-y-3">
-          {course.modules.map((mod, modIdx) => {
+          {(course.modules ?? []).map((mod, modIdx) => {
             const isOpen = openModules[mod.id] ?? true;
             return (
               <div key={mod.id} className="rounded-2xl bg-white dark:bg-[#0F111A] border border-slate-200 dark:border-white/10 overflow-hidden shadow-sm">

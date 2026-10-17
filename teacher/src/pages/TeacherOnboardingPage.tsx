@@ -101,23 +101,52 @@ export const TeacherOnboardingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#08090E] text-slate-900 dark:text-slate-100 flex flex-col justify-between font-sans antialiased">
+    <div className="min-h-screen bg-[#FAFAFA] text-slate-900 flex flex-col justify-between font-sans antialiased selection:bg-slate-900 selection:text-white">
+      {/* Top Prototype Switcher Banner */}
+      <div className="w-full bg-slate-900 text-white px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-emerald-400 font-bold">● TEST REJIMI</span>
+          <span className="text-slate-400">|</span>
+          <span className="text-slate-300">Ustoz Portalining barcha qismlarini 1 ta bosishda sinang:</span>
+        </div>
+        <div className="flex items-center gap-1.5 font-medium">
+          <button
+            onClick={() => navigate('/welcome')}
+            className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 hover:text-white hover:bg-slate-700 text-[11px]"
+          >
+            🌐 Ustoz Landing Page
+          </button>
+          <button
+            onClick={() => navigate('/onboarding')}
+            className="px-2.5 py-1 rounded-md bg-white text-slate-900 font-bold shadow-xs text-[11px]"
+          >
+            📝 Ro'yxatdan o'tish (Onboarding 4-Step)
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 hover:text-white hover:bg-slate-700 text-[11px]"
+          >
+            🎛️ Ustoz Studio (Dashboard)
+          </button>
+        </div>
+      </div>
+
       {/* Top Bar */}
-      <header className="h-16 border-b border-slate-200 dark:border-white/10 bg-white dark:bg-[#0F111A] px-4 sm:px-8 flex items-center justify-between">
+      <header className="h-14 border-b border-slate-200 bg-white px-4 sm:px-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs tracking-wider shadow-sm">
+          <div className="w-8 h-8 rounded-md bg-slate-900 text-white flex items-center justify-center font-bold text-xs tracking-wider">
             CS
           </div>
-          <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
-            EDUPRO <span className="text-xs font-mono font-normal text-blue-600">Ustoz Onboarding</span>
+          <span className="font-bold text-base tracking-tight text-slate-900">
+            EDUPRO <span className="text-xs font-mono font-normal text-slate-500">Ustoz Onboarding</span>
           </span>
         </div>
 
         <button
           onClick={() => navigate('/welcome')}
-          className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white font-medium"
+          className="text-xs text-slate-500 hover:text-slate-900 font-medium"
         >
-          Landing sahifaga qaytish
+          Landing sahifaga qaytish →
         </button>
       </header>
 

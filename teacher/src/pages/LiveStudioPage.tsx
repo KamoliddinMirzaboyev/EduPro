@@ -58,9 +58,9 @@ export const LiveStudioPage: React.FC<LiveStudioPageProps> = ({ onShowToast }) =
     },
     {
       id: 'live-102',
-      title: 'Django Ninja Async ORM & Redis Caching Live Coding',
-      courseTitle: 'Full-Stack Next.js 15 & Django Ninja Masterclass',
-      moduleName: '4-Modul: Performance & Cache',
+      title: 'IELTS Academic Reading: Speed Skimming & T/F/NG Live Clinic',
+      courseTitle: 'IELTS Academic 8.0+ Intensive',
+      moduleName: '1-Modul: Reading Strategies',
       scheduledAt: 'Ertaga, 19:30',
       durationMinutes: 90,
       status: 'SCHEDULED',

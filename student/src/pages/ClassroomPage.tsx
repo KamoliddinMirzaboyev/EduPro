@@ -36,8 +36,9 @@ export const ClassroomPage: React.FC<ClassroomPageProps> = ({ onShowToast }) => 
       fetchCourseDetail(courseId)
         .then(c => {
           setCourse(c);
-          if (c.modules.length > 0 && c.modules[0].lessons.length > 0) {
-            const firstLesson = c.modules[0].lessons[0];
+          const mods = c.modules ?? [];
+          if (mods.length > 0 && (mods[0].lessons ?? []).length > 0) {
+            const firstLesson = mods[0].lessons[0];
             setCurrentLesson(firstLesson);
             fetchLessonAssignments(firstLesson.id).then(setLessonAssignments);
           }
@@ -302,7 +303,7 @@ export const ClassroomPage: React.FC<ClassroomPageProps> = ({ onShowToast }) => 
         {/* Right Column: Timeline Stepper */}
         <div className="lg:col-span-4 p-4 sm:p-6 lg:p-8">
           <TimelineStepper
-            modules={course.modules}
+            modules={course.modules ?? []}
             currentLesson={currentLesson}
             onSelectLesson={handleSelectLesson}
             openModules={openModules}
