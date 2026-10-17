@@ -119,21 +119,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside 
-      className={`fixed inset-y-0 left-0 z-50 shrink-0 flex flex-col justify-between transition-all duration-200 ease-in-out lg:static bg-white border-r border-slate-200 h-screen ${
+      className={`fixed inset-y-0 left-0 z-50 shrink-0 flex flex-col justify-between transition-all duration-200 ease-in-out lg:static bg-white dark:bg-zinc-900 border-r border-slate-200 dark:border-zinc-800 h-screen ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
       } ${sidebarCollapsed ? 'lg:w-18 w-64' : 'w-64'}`}
     >
       <div className="h-full flex flex-col justify-between overflow-hidden">
         {/* Top Brand Header */}
-        <div className="h-14 px-4 border-b border-slate-200 flex items-center justify-between shrink-0 bg-white">
+        <div className="h-14 px-4 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between shrink-0 bg-white dark:bg-zinc-900">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-md bg-slate-900 text-white flex items-center justify-center font-bold text-xs tracking-wider shrink-0">
+            <div className="w-8 h-8 rounded-md bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold text-xs tracking-wider shrink-0">
               EP
             </div>
             {!sidebarCollapsed && (
               <div className="flex items-center gap-1.5 truncate">
-                <span className="font-bold text-sm tracking-tight text-slate-900">EDUPRO</span>
-                <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded-sm bg-slate-100 text-slate-700 border border-slate-200">
+                <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-zinc-100">EDUPRO</span>
+                <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded-sm bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-zinc-700">
                   STUDIO
                 </span>
               </div>
@@ -181,17 +181,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 className={({ isActive }) =>
                   `flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium transition-all group ${
                     isActive
-                      ? 'bg-slate-900 text-white shadow-xs font-semibold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                      ? 'bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-xs font-semibold'
+                      : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:bg-slate-100 dark:hover:bg-zinc-800'
                   } ${sidebarCollapsed ? 'justify-center px-2' : ''}`
                 }
               >
                 {({ isActive }) => (
                   <>
                     <div className="relative shrink-0 flex items-center justify-center">
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-500 group-hover:text-slate-900'}`} />
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-white dark:text-zinc-900' : 'text-slate-500 dark:text-zinc-400 group-hover:text-slate-900 dark:group-hover:text-zinc-100'}`} />
                       {sidebarCollapsed && item.badge > 0 && (
-                        <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+                        <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-zinc-900"></span>
                       )}
                     </div>
 
@@ -200,7 +200,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         <span className="truncate">{item.label}</span>
                         {item.badge > 0 && (
                           <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-sm shrink-0 ml-2 ${
-                            isActive ? 'bg-white/20 text-white' : item.badgeColor
+                            isActive ? 'bg-white/20 dark:bg-zinc-900/20 text-white dark:text-zinc-900' : item.badgeColor
                           }`}>
                             {item.badgeText}
                           </span>
@@ -215,25 +215,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Bottom User Profile Section */}
-        <div className="p-3 border-t border-slate-200 shrink-0 bg-slate-50">
+        <div className="p-3 border-t border-slate-200 dark:border-zinc-800 shrink-0 bg-slate-50 dark:bg-zinc-950">
           {sidebarCollapsed ? (
             <div className="flex justify-center" title="Sardor Daminov (Senior IELTS 8.5 Instructor)">
-              <div className="w-8 h-8 rounded-md bg-slate-900 text-white font-bold text-xs flex items-center justify-center">
+              <div className="w-8 h-8 rounded-md bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-bold text-xs flex items-center justify-center">
                 SD
               </div>
             </div>
           ) : (
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-md bg-slate-900 text-white font-bold text-xs flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-md bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-bold text-xs flex items-center justify-center shrink-0">
                 SD
               </div>
               <div className="min-w-0 flex-1">
-                <div className="text-xs font-bold text-slate-900 truncate">
+                <div className="text-xs font-bold text-slate-900 dark:text-zinc-100 truncate">
                   Sardor Daminov
                 </div>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span className="text-[10px] text-slate-500 font-mono truncate">
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-400 font-mono truncate">
                     IELTS 8.5 Master Instructor
                   </span>
                 </div>

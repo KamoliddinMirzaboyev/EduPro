@@ -61,21 +61,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside 
-      className={`fixed inset-y-0 left-0 z-50 shrink-0 flex flex-col justify-between transition-all duration-200 ease-in-out lg:static bg-white border-r border-slate-200 h-screen ${
+      className={`fixed inset-y-0 left-0 z-50 shrink-0 flex flex-col justify-between transition-all duration-200 ease-in-out lg:static bg-white dark:bg-zinc-900 border-r border-slate-200 dark:border-zinc-800 h-screen ${
         sidebarMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
       } ${sidebarCollapsed ? 'lg:w-18 w-64' : 'w-64'}`}
     >
       <div className="h-full flex flex-col justify-between overflow-hidden">
         {/* Top Brand Section */}
-        <div className="h-14 px-4 border-b border-slate-200 flex items-center justify-between shrink-0 bg-white">
+        <div className="h-14 px-4 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between shrink-0 bg-white dark:bg-zinc-900">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-md bg-slate-900 text-white flex items-center justify-center font-bold text-xs tracking-wider shrink-0">
+            <div className="w-8 h-8 rounded-md bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold text-xs tracking-wider shrink-0">
               EP
             </div>
             {!sidebarCollapsed && (
               <div className="flex items-center gap-1.5 truncate">
-                <span className="font-bold text-sm tracking-tight text-slate-900">EDUPRO</span>
-                <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded-sm bg-slate-100 text-slate-700 border border-slate-200">
+                <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-zinc-100">EDUPRO</span>
+                <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded-sm bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-zinc-700">
                   Student
                 </span>
               </div>
@@ -86,7 +86,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {/* Desktop Collapse Toggle */}
             <button
               onClick={() => setSidebarCollapsed(prev => !prev)}
-              className="hidden lg:flex p-1.5 rounded-md hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors"
+              className="hidden lg:flex p-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 transition-colors"
               title={sidebarCollapsed ? "Sidebar kengaytirish" : "Sidebar yig'ish"}
             >
               {sidebarCollapsed ? <PanelLeftOpen className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
@@ -95,7 +95,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {/* Mobile Close Button */}
             <button 
               onClick={() => setSidebarMobileOpen(false)}
-              className="lg:hidden text-slate-400 hover:text-slate-600 p-1 rounded-md"
+              className="lg:hidden text-slate-400 hover:text-slate-600 dark:hover:text-zinc-200 p-1 rounded-md"
             >
               <X className="w-4 h-4" />
             </button>
@@ -123,14 +123,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   sidebarCollapsed ? 'justify-center px-2' : ''
                 } ${
                   isActive 
-                    ? 'bg-slate-900 text-white font-semibold shadow-xs' 
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                    ? 'bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-semibold shadow-xs' 
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:bg-slate-100 dark:hover:bg-zinc-800'
                 }`}
               >
                 {({ isActive }) => (
                   <>
                     <div className="relative shrink-0 flex items-center justify-center">
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-500'}`} />
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-white dark:text-zinc-900' : 'text-slate-500 dark:text-zinc-400'}`} />
                     </div>
 
                     {!sidebarCollapsed && (
@@ -144,25 +144,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Bottom User Profile */}
-        <div className="p-3 border-t border-slate-200 shrink-0 bg-slate-50">
+        <div className="p-3 border-t border-slate-200 dark:border-zinc-800 shrink-0 bg-slate-50 dark:bg-zinc-950">
           {sidebarCollapsed ? (
             <div className="flex justify-center" title="Kamron Mirzayev (Talaba)">
-              <div className="w-8 h-8 rounded-md bg-slate-900 text-white font-bold text-xs flex items-center justify-center">
+              <div className="w-8 h-8 rounded-md bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-bold text-xs flex items-center justify-center">
                 KM
               </div>
             </div>
           ) : (
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-md bg-slate-900 text-white font-bold text-xs flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-md bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-bold text-xs flex items-center justify-center shrink-0">
                 KM
               </div>
               <div className="min-w-0 flex-1">
-                <div className="text-xs font-bold text-slate-900 truncate">
+                <div className="text-xs font-bold text-slate-900 dark:text-zinc-100 truncate">
                   Kamron Mirzayev
                 </div>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span className="text-[10px] text-slate-500 font-mono truncate">
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-400 font-mono truncate">
                     Faol Talaba
                   </span>
                 </div>

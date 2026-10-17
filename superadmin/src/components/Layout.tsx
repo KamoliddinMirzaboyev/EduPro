@@ -29,7 +29,7 @@ export const Layout: React.FC<LayoutProps> = ({
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[#FAFAFA] text-slate-900 flex font-sans antialiased selection:bg-slate-900 selection:text-white">
+    <div className="h-screen w-screen overflow-hidden bg-[#FAFAFA] dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 flex font-sans antialiased selection:bg-slate-900 selection:text-white transition-colors">
       {/* Mobile Backdrop Overlay */}
       {sidebarOpen && (
         <div 
@@ -62,7 +62,7 @@ export const Layout: React.FC<LayoutProps> = ({
         />
 
         {/* Scrollable Content Viewport */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 custom-scrollbar bg-[#FAFAFA]">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 custom-scrollbar bg-[#FAFAFA] dark:bg-zinc-950 transition-colors">
           {/* Toast Notification */}
           {toastMessage && (
             <div className="p-3.5 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-2.5 text-xs animate-in slide-in-from-top-2 duration-200 shadow-xs">

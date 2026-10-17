@@ -10,23 +10,36 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>(() => {
+    try {
+      const saved = localStorage.getItem('edupro-theme');
+      return (saved === 'dark' || saved === 'light') ? saved : 'light';
+    } catch (e) {
+      return 'light';
+    }
+  });
 
   useEffect(() => {
     try {
-      localStorage.setItem('edupro-theme', 'light');
+      localStorage.setItem('edupro-theme', theme);
     } catch (e) {}
 
     const root = document.documentElement;
-    root.classList.remove('dark');
-    root.classList.add('light');
-    document.body.classList.remove('dark');
-    document.body.classList.add('light');
-  }, []);
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.classList.remove('light');
+      document.body.classList.add('dark');
+      document.body.classList.remove('light');
+    } else {
+      root.classList.remove('dark');
+      root.classList.add('light');
+      document.body.classList.remove('dark');
+      document.body.classList.add('light');
+    }
+  }, [theme]);
 
   const toggleTheme = () => {
-    // Keep light theme active
-    setTheme('light');
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
   return (

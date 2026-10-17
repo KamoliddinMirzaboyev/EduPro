@@ -13,7 +13,7 @@ export const Layout: React.FC<LayoutProps> = ({ toastMessage }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[#FAFAFA] text-slate-900 flex font-sans antialiased selection:bg-slate-900 selection:text-white">
+    <div className="h-screen w-screen overflow-hidden bg-[#FAFAFA] dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 flex font-sans antialiased selection:bg-slate-900 selection:text-white transition-colors">
       {/* Mobile Drawer Backdrop */}
       {sidebarMobileOpen && (
         <div 
@@ -36,10 +36,10 @@ export const Layout: React.FC<LayoutProps> = ({ toastMessage }) => {
         <Header setSidebarMobileOpen={setSidebarMobileOpen} />
 
         {/* Scrollable Content Viewport */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 custom-scrollbar bg-[#FAFAFA]">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 custom-scrollbar bg-[#FAFAFA] dark:bg-zinc-950 transition-colors">
           {/* Global Toast */}
           {toastMessage && (
-            <div className="fixed bottom-6 right-6 z-50 p-3.5 rounded-md bg-white border border-slate-200 text-slate-900 flex items-center gap-3 text-xs shadow-lg animate-in slide-in-from-bottom duration-200">
+            <div className="fixed bottom-6 right-6 z-50 p-3.5 rounded-md bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-zinc-100 flex items-center gap-3 text-xs shadow-lg animate-in slide-in-from-bottom duration-200">
               <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
               <span className="font-semibold">{toastMessage}</span>
             </div>

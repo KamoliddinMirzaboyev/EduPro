@@ -13,9 +13,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setTheme] = useState<Theme>(() => {
     try {
       const saved = localStorage.getItem('edupro-theme');
-      return (saved === 'light' || saved === 'dark') ? saved : 'dark';
+      return (saved === 'light' || saved === 'dark') ? saved : 'light';
     } catch (e) {
-      return 'dark';
+      return 'light';
     }
   });
 

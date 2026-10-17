@@ -12,9 +12,14 @@
     <script>
       (function() {
         try {
-          localStorage.setItem('edupro-theme', 'light');
-          document.documentElement.classList.remove('dark');
-          document.documentElement.classList.add('light');
+          var t = localStorage.getItem('edupro-theme') || 'light';
+          if (t === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          }
         } catch (e) {}
       })();
     </script>
