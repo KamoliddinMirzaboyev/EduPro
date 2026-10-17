@@ -19,4 +19,5 @@ class LessonProgress(models.Model):
         ordering = ['-updated_at']
 
     def __str__(self):
-        return f"{self.student.full_name} - {self.lesson.title}: {self.watched_seconds}s (done: {self.is_completed})"
+        student_name = getattr(self.student, 'full_name', getattr(self.student, 'username', 'Student'))
+        return f"{student_name} - {self.lesson.title}: {self.watched_seconds}s (done: {self.is_completed})"

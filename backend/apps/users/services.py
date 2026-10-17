@@ -1,4 +1,5 @@
 import uuid
+from typing import Optional
 from django.contrib.auth import authenticate
 from apps.users.models import User, TeacherProfile, StudentProfile, UserRole
 from core.auth import create_access_token
@@ -47,7 +48,7 @@ class UserService:
         return user, token
 
     @staticmethod
-    def verify_otp_and_login(phone_number: str, role: str = 'STUDENT', full_name: str = None):
+    def verify_otp_and_login(phone_number: str, role: str = 'STUDENT', full_name: Optional[str] = None):
         clean_phone = phone_number.strip().replace(' ', '').replace('-', '')
         user = User.objects.filter(phone_number=clean_phone).first()
 

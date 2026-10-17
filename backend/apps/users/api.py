@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 from uuid import UUID
 from ninja import Router
 from apps.users.models import User, TeacherProfile, StudentProfile, UserRole, KycStatus
@@ -14,7 +14,7 @@ from apps.users.schemas import (
     StudentOnboardingInput
 )
 from apps.users.services import UserService
-from core.auth import AuthBearer, OptionalAuthBearer, check_role
+from core.auth import AuthBearer
 from core.exceptions import NotFoundError, ValidationError
 
 router = Router(tags=["Users & Auth"])
