@@ -9,6 +9,8 @@ import { MyLearningPage } from './pages/MyLearningPage';
 import { AssignmentsHubPage } from './pages/AssignmentsHubPage';
 import { LiveSchedulePage } from './pages/LiveSchedulePage';
 import { CertificatesLeaderboardPage } from './pages/CertificatesLeaderboardPage';
+import { WelcomeLandingPage } from './pages/WelcomeLandingPage';
+import { StudentOnboardingPage } from './pages/StudentOnboardingPage';
 import { CheckoutModal } from './components/CheckoutModal';
 import { fetchCourses, processCheckout, CourseDetail } from './api/client';
 
@@ -59,6 +61,8 @@ const AppContent: React.FC = () => {
   return (
     <>
       <Routes>
+        <Route path="/welcome" element={<WelcomeLandingPage />} />
+        <Route path="/onboarding" element={<StudentOnboardingPage />} />
         <Route element={<Layout toastMessage={toastMessage} />}>
           <Route
             path="/"

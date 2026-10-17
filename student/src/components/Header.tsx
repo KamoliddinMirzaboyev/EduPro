@@ -1,6 +1,5 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Menu, Sun, Moon } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, Sun, Moon, Globe, Compass } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 interface HeaderProps {
@@ -44,6 +43,24 @@ export const Header: React.FC<HeaderProps> = ({ setSidebarMobileOpen, pageTitle 
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
+        {/* Quick Portal Switchers */}
+        <div className="hidden md:flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 text-xs">
+          <Link
+            to="/welcome"
+            className="px-2.5 py-1 rounded-lg text-slate-600 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 font-medium transition-all flex items-center gap-1.5 text-[11px]"
+          >
+            <Globe className="w-3.5 h-3.5" />
+            <span>Landing</span>
+          </Link>
+          <Link
+            to="/onboarding"
+            className="px-2.5 py-1 rounded-lg text-slate-600 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 font-medium transition-all flex items-center gap-1.5 text-[11px]"
+          >
+            <Compass className="w-3.5 h-3.5" />
+            <span>Onboarding</span>
+          </Link>
+        </div>
+
         {/* Theme Toggle Button */}
         <button 
           onClick={toggleTheme}
@@ -60,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({ setSidebarMobileOpen, pageTitle 
         {/* Live Badge */}
         <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-white/10 text-xs font-mono">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span className="text-slate-500 dark:text-zinc-400 text-[11px]">Tizim Faol</span>
+          <span className="text-slate-500 dark:text-zinc-400 text-[11px]">API: 8001</span>
         </div>
       </div>
     </header>

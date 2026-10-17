@@ -8,6 +8,11 @@ class UserRole(models.TextChoices):
     CURATOR = 'CURATOR', 'Curator'
     STUDENT = 'STUDENT', 'Student'
 
+class KycStatus(models.TextChoices):
+    PENDING = 'PENDING', 'Pending'
+    APPROVED = 'APPROVED', 'Approved'
+    REJECTED = 'REJECTED', 'Rejected'
+
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     role = models.CharField(max_length=20, choices=UserRole.choices, default=UserRole.STUDENT)
@@ -15,6 +20,7 @@ class User(AbstractUser):
     full_name = models.CharField(max_length=150, blank=True)
     avatar = models.URLField(max_length=500, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
+    is_onboarded = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -31,7 +37,14 @@ class TeacherProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='teacher_profile')
     bio = models.TextField(blank=True)
     specialization = models.CharField(max_length=255, default='IELTS Instructor')
+    experience_years = models.PositiveIntegerField(default=3)
+    public_handle = models.CharField(max_length=50, blank=True)
+    certificate_type = models.CharField(max_length=100, default='IELTS TRF')
+    certificate_number = models.CharField(max_length=100, blank=True)
     certificate_url = models.URLField(max_length=500, blank=True, null=True)
+    payout_card_number = models.CharField(max_length=30, blank=True)
+    payout_card_holder = models.CharField(max_length=150, blank=True)
+    kyc_status = models.CharField(max_length=20, choices=KycStatus.choices, default=KycStatus.PENDING)
     commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=10.00) # 10%
     escrow_balance = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     available_balance = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
@@ -39,4 +52,18 @@ class TeacherProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Teacher: {self.user.full_name} ({self.specialization})"
+        return f"Teacher: {self.user.full_name} ({self.specialization}) [{self.kyc_status}]"
+
+class StudentProfile(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student_profile')
+    learning_goal = models.CharField(max_length=100, default='IELTS 7.5+')
+    current_level = models.CharField(max_length=100, default='Intermediate')
+    target_exam_date = models.CharField(max_length=50, blank=True)
+    daily_study_minutes = models.PositiveIntegerField(default=60)
+    telegram_notifications_enabled = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Student: {self.user.full_name} - {self.learning_goal}"

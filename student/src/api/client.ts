@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_BASE = 'http://localhost:8000/api/v1';
+export const API_BASE = (import.meta as any).env?.VITE_API_BASE || 'http://localhost:8001/api/v1';
 
 export const apiClient = axios.create({
   baseURL: API_BASE,
@@ -15,6 +15,35 @@ apiClient.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
+
+export const requestOtp = async (phoneNumber: string) => {
+  const res = await apiClient.post('/users/request-otp', { phone_number: phoneNumber });
+  return res.data;
+};
+
+export const verifyOtp = async (phoneNumber: string, otpCode: string, role: string = 'STUDENT', fullName?: string) => {
+  const res = await apiClient.post('/users/verify-otp', {
+    phone_number: phoneNumber,
+    otp_code: otpCode,
+    role,
+    full_name: fullName
+  });
+  if (res.data?.token) {
+    localStorage.setItem('edupro_token', res.data.token);
+  }
+  return res.data;
+};
+
+export const submitStudentOnboarding = async (data: {
+  full_name: string;
+  learning_goal: string;
+  current_level: string;
+  daily_study_minutes: number;
+  telegram_notifications_enabled: boolean;
+}) => {
+  const res = await apiClient.post('/users/student-onboarding', data);
+  return res.data;
+};
 
 // SWR Cache & Deduplication
 interface CacheEntry<T> {

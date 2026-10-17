@@ -11,6 +11,8 @@ import { QuizBuilderPage } from './pages/QuizBuilderPage';
 import { TeamCuratorsPage } from './pages/TeamCuratorsPage';
 import { MediaLibraryPage } from './pages/MediaLibraryPage';
 import { FunnelsPage } from './pages/FunnelsPage';
+import { WelcomeLandingPage } from './pages/WelcomeLandingPage';
+import { TeacherOnboardingPage } from './pages/TeacherOnboardingPage';
 import { 
   fetchCourses, 
   fetchCourseDetail, 
@@ -151,6 +153,8 @@ export function App() {
     <ThemeProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/welcome" element={<WelcomeLandingPage />} />
+          <Route path="/onboarding" element={<TeacherOnboardingPage />} />
           <Route
             element={
               <Layout

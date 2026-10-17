@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_BASE = 'http://localhost:8000/api/v1';
+export const API_BASE = (import.meta as any).env?.VITE_API_BASE || 'http://localhost:8001/api/v1';
 
 export const apiClient = axios.create({
   baseURL: API_BASE,
@@ -15,6 +15,40 @@ apiClient.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
+
+export const requestOtp = async (phoneNumber: string) => {
+  const res = await apiClient.post('/users/request-otp', { phone_number: phoneNumber });
+  return res.data;
+};
+
+export const verifyOtp = async (phoneNumber: string, otpCode: string, role: string = 'TEACHER', fullName?: string) => {
+  const res = await apiClient.post('/users/verify-otp', {
+    phone_number: phoneNumber,
+    otp_code: otpCode,
+    role,
+    full_name: fullName
+  });
+  if (res.data?.token) {
+    localStorage.setItem('edupro_token', res.data.token);
+  }
+  return res.data;
+};
+
+export const submitTeacherOnboarding = async (data: {
+  full_name: string;
+  specialization: string;
+  experience_years: number;
+  bio: string;
+  public_handle: string;
+  certificate_type: string;
+  certificate_number: string;
+  certificate_url?: string;
+  payout_card_number: string;
+  payout_card_holder: string;
+}) => {
+  const res = await apiClient.post('/users/teacher-onboarding', data);
+  return res.data;
+};
 
 // ==========================================
 // ADVANCED SWR CACHING & DEDUPLICATION
