@@ -75,9 +75,26 @@ class UserService:
                     learning_goal="IELTS 7.5+"
                 )
         else:
-            if full_name and not user.full_name:
+            changed = False
+            if full_name and user.full_name != full_name:
                 user.full_name = full_name
+                changed = True
+            if role and user.role != role:
+                user.role = role
+                changed = True
+            if changed:
                 user.save()
+
+            if user.role == UserRole.TEACHER:
+                TeacherProfile.objects.get_or_create(
+                    user=user,
+                    defaults={'specialization': "Ustoz", 'bio': ""}
+                )
+            elif user.role == UserRole.STUDENT:
+                StudentProfile.objects.get_or_create(
+                    user=user,
+                    defaults={'learning_goal': "IELTS 7.5+"}
+                )
 
         token = create_access_token(str(user.id), user.role)
         return user, token

@@ -87,7 +87,11 @@ def list_courses(
     status: Optional[str] = None,
     teacher_id: Optional[UUID] = None
 ):
-    qs = Course.objects.all().select_related('teacher')
+    qs = Course.objects.all().select_related('teacher', 'teacher__teacher_profile').prefetch_related(
+        'modules__lessons__materials',
+        'tariffs',
+        'enrollments'
+    )
     if category:
         qs = qs.filter(category__iexact=category)
     if status:
@@ -97,33 +101,11 @@ def list_courses(
 
     results = []
     for c in qs:
-        spec = getattr(getattr(c.teacher, 'teacher_profile', None), 'specialization', None)
-        total_mods = c.modules.count()
-        total_less = sum(m.lessons.count() for m in c.modules.all())
-        total_students = getattr(c, 'enrollments', []).count() if hasattr(c, 'enrollments') else 0
-
-        results.append({
-            "id": c.id,
-            "title": c.title,
-            "slug": c.slug,
-            "description": c.description,
-            "category": c.category,
-            "price": float(c.price),
-            "status": c.status,
-            "has_drip_lock": c.has_drip_lock,
-            "thumbnail_url": c.thumbnail_url,
-            "teacher": {
-                "id": c.teacher.id,
-                "full_name": c.teacher.full_name,
-                "avatar": c.teacher.avatar,
-                "is_verified": c.teacher.is_verified,
-                "specialization": spec
-            },
-            "total_modules": total_mods,
-            "total_lessons": total_less,
-            "total_students": total_students,
-            "created_at": c.created_at
-        })
+        item = course_to_detail_dict(c)
+        item["total_modules"] = len(item["modules"])
+        item["total_lessons"] = sum(len(m["lessons"]) for m in item["modules"])
+        item["total_students"] = c.enrollments.count()
+        results.append(item)
     return results
 
 @router.post("/upload-simulation")

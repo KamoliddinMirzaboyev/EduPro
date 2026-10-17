@@ -73,6 +73,7 @@ def teacher_onboarding(request, payload: TeacherOnboardingInput):
     profile.kyc_status = KycStatus.PENDING
     profile.save()
 
+    user.refresh_from_db()
     return user
 
 @router.post("/student-onboarding", response=UserSchema, auth=AuthBearer())
@@ -89,11 +90,14 @@ def student_onboarding(request, payload: StudentOnboardingInput):
     profile.telegram_notifications_enabled = payload.telegram_notifications_enabled
     profile.save()
 
+    user.refresh_from_db()
     return user
 
 @router.get("/me", response=UserSchema, auth=AuthBearer())
 def get_me(request):
-    return request.user
+    user = request.user
+    user.refresh_from_db()
+    return user
 
 @router.get("/teachers", response=List[UserSchema])
 def list_teachers(request):

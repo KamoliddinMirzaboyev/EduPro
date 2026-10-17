@@ -55,6 +55,8 @@ class CourseListSchema(BaseModel):
     total_modules: int = 0
     total_lessons: int = 0
     total_students: int = 0
+    tariffs: List[CourseTariffSchema] = []
+    modules: List[ModuleSchema] = []
     created_at: datetime
 
 class CourseDetailSchema(BaseModel):
